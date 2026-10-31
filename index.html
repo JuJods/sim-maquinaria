@@ -1,1 +1,193 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIM | Mantenimiento de Maquinaria</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f1f5f9;
+      color: #172033;
+    }
+    header {
+      background: #10233f;
+      color: white;
+      padding: 22px;
+    }
+    header h1 { margin: 0 0 6px; font-size: 23px; }
+    header p { margin: 0; color: #cbd5e1; font-size: 14px; }
+    .layout { display: flex; min-height: calc(100vh - 85px); }
+    nav {
+      width: 225px;
+      flex-shrink: 0;
+      background: #172d4d;
+      padding: 20px 12px;
+      color: white;
+    }
+    nav h3 {
+      padding: 0 10px;
+      font-size: 12px;
+      color: #9fb4d0;
+      text-transform: uppercase;
+    }
+    nav button {
+      display: block;
+      width: 100%;
+      border: 0;
+      padding: 13px 10px;
+      margin: 4px 0;
+      border-radius: 7px;
+      text-align: left;
+      background: transparent;
+      color: white;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    nav button:hover, nav button.active { background: #2b4d78; }
+    main { flex: 1; padding: 28px; min-width: 0; }
+    .welcome { margin-bottom: 24px; }
+    .welcome h2 { margin: 0 0 8px; font-size: 25px; }
+    .welcome p { color: #64748b; margin: 0; }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 3px 10px #0f172a08;
+    }
+    .card span { color: #64748b; font-size: 13px; }
+    .card h3 { font-size: 28px; margin: 12px 0 6px; }
+    .card p { color: #64748b; font-size: 12px; margin: 0; }
+    .section {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 22px;
+      margin-top: 22px;
+    }
+    .section h3 { margin-top: 0; }
+    .notice {
+      padding: 14px;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #1d4ed8;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .section button {
+      padding: 10px 15px;
+      border: 0;
+      border-radius: 7px;
+      background: #1d65d8;
+      color: white;
+      cursor: pointer;
+    }
+    footer { color: #64748b; font-size: 12px; margin-top: 25px; }
+    @media (max-width: 650px) {
+      .layout { display: block; }
+      nav { width: 100%; }
+      nav h3 { margin-top: 5px; }
+      main { padding: 18px; }
+      .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .card { padding: 14px; }
+      .card h3 { font-size: 23px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>SIM | Sistema Integral de Mantenimiento</h1>
+    <p>Departamento de Mantenimiento de Maquinaria</p>
+  </header>
+
+  <div class="layout">
+    <nav>
+      <h3>Menú principal</h3>
+      <button class="active" onclick="mostrar('inicio')">▦ Inicio</button>
+      <button onclick="mostrar('ordenes')">▤ Órdenes de trabajo</button>
+      <button onclick="mostrar('maquinaria')">⚙ Maquinaria</button>
+      <button onclick="mostrar('inventario')">▣ Inventario y repuestos</button>
+      <button onclick="mostrar('combustible')">⛽ Combustible</button>
+      <button onclick="mostrar('reportes')">▥ Reportes</button>
+      <button onclick="mostrar('usuarios')">♙ Usuarios</button>
+    </nav>
+
+    <main>
+      <div class="welcome">
+        <h2 id="titulo">Panel principal</h2>
+        <p>Bienvenido a SIM-Maquinaria. Control centralizado del mantenimiento.</p>
+      </div>
+
+      <div id="contenido">
+        <div class="cards">
+          <div class="card">
+            <span>Órdenes de trabajo</span>
+            <h3>—</h3>
+            <p>Pendientes y en proceso</p>
+          </div>
+          <div class="card">
+            <span>Equipos registrados</span>
+            <h3>—</h3>
+            <p>Inventario de maquinaria</p>
+          </div>
+          <div class="card">
+            <span>Equipos bloqueados</span>
+            <h3>—</h3>
+            <p>Por restricción de mantenimiento</p>
+          </div>
+          <div class="card">
+            <span>Solicitudes urgentes</span>
+            <h3>—</h3>
+            <p>Requieren revisión</p>
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Estado del sistema</h3>
+          <div class="notice">
+            La interfaz inicial está creada. Los datos todavía no están conectados
+            a la base de datos. El siguiente paso será configurar el acceso seguro
+            y conectar los módulos.
+          </div>
+        </div>
+      </div>
+
+      <footer>SIM-Maquinaria · Versión inicial de desarrollo</footer>
+    </main>
+  </div>
+
+  <script>
+    const paginas = {
+      inicio: ["Panel principal", "Resumen general de mantenimiento y maquinaria."],
+      ordenes: ["Órdenes de trabajo", "Aquí construiremos la creación, asignación, seguimiento y validación de las OT."],
+      maquinaria: ["Maquinaria", "Aquí registraremos equipos, horómetros, disponibilidad y restricciones."],
+      inventario: ["Inventario y repuestos", "Aquí gestionaremos almacenes, existencias y repuestos utilizados."],
+      combustible: ["Combustible", "Aquí controlaremos ingresos, despachos y existencias de combustible."],
+      reportes: ["Reportes", "Aquí consultaremos indicadores, historial y exportaciones."],
+      usuarios: ["Usuarios", "Aquí gestionaremos perfiles, categorías y permisos de acceso."]
+    };
+
+    function mostrar(pagina) {
+      document.getElementById("titulo").textContent = paginas[pagina][0];
+      document.getElementById("contenido").innerHTML =
+        '<div class="section"><h3>' + paginas[pagina][0] +
+        '</h3><p>' + paginas[pagina][1] +
+        '</p><div class="notice">Módulo pendiente de configuración.</div></div>';
+
+      document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+      const boton = [...document.querySelectorAll("nav button")]
+        .find(b => b.getAttribute("onclick") === "mostrar('" + pagina + "')");
+      if (boton) boton.classList.add("active");
+    }
+  </script>
+</body>
+</html>
