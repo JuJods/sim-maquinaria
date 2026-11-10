@@ -102,12 +102,12 @@
       .card h3 { font-size: 23px; }
     }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
   <header>
     <h1>SIM | Sistema Integral de Mantenimiento</h1>
     <p>Departamento de Mantenimiento de Maquinaria</p>    
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   </header>
 
   <div class="layout">
@@ -165,7 +165,18 @@
       <footer>SIM-Maquinaria · Versión inicial de desarrollo</footer>
     </main>
   </div>
+   
+<script>
+  const SUPABASE_URL = "https://txdmumvnsfxmdjdnytlx.supabase.co";
 
+  const SUPABASE_KEY = "sb_publishable_fQW6aIqgFF2gjQjvPyN7wQ_1haF-ahw";
+
+  const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+</script>
+  
   <script>
     const paginas = {
       inicio: ["Panel principal", "Resumen general de mantenimiento y maquinaria."],
